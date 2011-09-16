@@ -1,0 +1,31 @@
+# Cache and userfiles
+config/config.yml
+# Do not include these until implemented
+library/PHamlP
+library/cssmin.php
+
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# IDE Files
+.buildpath
+.externalToolBuilders
+.project
+.settings
+nbproject
+*.LCK
+*.kpf
+.tmp_*
+_notes
+.idea
+.cache
+
+# Source Control
+.svn
+.hg
+.hgignore
+.hgexternals
+CVS
+.bzr
