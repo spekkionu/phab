@@ -1,0 +1,22 @@
+PHP Application Builder
+
+Requirements:
+-------------
+PHP 5.2+
+Zend Framework available from include path
+PEAR installation available from include path
+
+
+Installation:
+-------------
+Copy the sample.config.yml to config.yml
+Edit to point to repository of desired application.
+
+
+
+Usage:
+------
+
+phab project:create path
+Creates a new project in the given path.
+Path may be relative or absolute.
