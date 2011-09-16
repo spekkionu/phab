@@ -50,7 +50,7 @@ class ProjectController extends Controller{
       $options = array('fetchmode' => VERSIONCONTROL_SVN_FETCHMODE_RAW, 'svn_path'=>$this->config->subversion->svn_path);
       $svn = VersionControl_SVN::factory('export', $options);
       $switches = array();
-      if( $this->config->repository->username &&  $this->config->repository->password){
+      if( $this->config->repository->params->username &&  $this->config->repository->params->password){
         $switches['username'] = $this->config->repository->params->username;
         $switches['password'] = $this->config->repository->params->password;
       }
