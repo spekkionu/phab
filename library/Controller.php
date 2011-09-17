@@ -22,7 +22,7 @@ abstract class Controller {
 
   /**
    * Config object
-   * @var Zend_Config $config
+   * @var array $config
    */
   protected $config;
 
@@ -36,7 +36,7 @@ abstract class Controller {
    * Class Contructor
    * @param Console_CommandLine_Result $result The parsed command line results
    */
-  public function __construct(Console_CommandLine_Result $result, Zend_Config $config){
+  public function __construct(Console_CommandLine_Result $result, array $config){
     // Save config object
     $this->config = $config;
     // Save current path
@@ -55,7 +55,7 @@ abstract class Controller {
    */
   protected function showMessage($message="", $color = false, $force = false){
     if($this->debug || $force){
-      if($color && $this->config->show_colors){
+      if($color && $this->config['show_colors']){
         $message = Console_Color::convert($message);
       }
       echo $message.PHP_EOL;
@@ -69,7 +69,8 @@ abstract class Controller {
    * @return void
    */
   protected function dump($data, $label=null){
-    Zend_Debug::dump($data, $label);
+    $this->showMessage($label);
+    var_dump($data);
   }
 
   /**
@@ -77,7 +78,7 @@ abstract class Controller {
    * @param type $message
    */
   protected function throwError($message){
-    if($this->config->show_colors){
+    if($this->config['show_colors']){
       $message = Console_Color::convert("%W%1".Console_Color::escape($message)."%n");
     }
     echo $message.PHP_EOL;

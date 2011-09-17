@@ -42,30 +42,33 @@ class ProjectController extends Controller{
       }
     }
     $this->showMessage("Checkout project files from repository.");
-    if($this->config->repository->type == 'svn'){
-      $this->showMessage("Export svn repository {$this->config->repository->url}.");
+    if($this->config['repository']['type'] == 'svn'){
+      $this->showMessage("Export svn repository {$this->config['repository']['url']}.");
       // Checkout Repository
+      require_once 'PEAR/ErrorStack.php';
       require_once 'VersionControl/SVN.php';
       $svnstack = PEAR_ErrorStack::singleton('VersionControl_SVN');
-      $options = array('fetchmode' => VERSIONCONTROL_SVN_FETCHMODE_RAW, 'svn_path'=>$this->config->subversion->svn_path);
+      $options = array('fetchmode' => VERSIONCONTROL_SVN_FETCHMODE_RAW, 'svn_path'=>$this->config['subversion']['svn_path']);
       $svn = VersionControl_SVN::factory('export', $options);
       $switches = array();
-      if( $this->config->repository->params->username &&  $this->config->repository->params->password){
-        $switches['username'] = $this->config->repository->params->username;
-        $switches['password'] = $this->config->repository->params->password;
+      if( $this->config['repository']['params']['username']){
+        $switches['username'] = $this->config['repository']['params']['username'];
       }
-      if($this->config->repository->params->revision){
-        $switches['revision'] = $this->config->repository->params->revision;
+      if($this->config['repository']['params']['password']){
+        $switches['password'] = $this->config['repository']['params']['password'];
+      }
+      if($this->config['repository']['params']['revision']){
+        $switches['revision'] = $this->config['repository']['params']['revision'];
       }
       $switches['force'] = true;
-      $args = array($this->config->repository->url, $path);
+      $args = array($this->config['repository']['url'], $path);
       if ($output = $svn->run($args, $switches)) {
           $this->showmessage($output, true);
       } else {
         $this->dump($svnstack->getErrors(), 'SVN Export Errors');
         $this->throwError("Failed to export repository.");
       }
-    }elseif($this->config->repository->type == 'git'){
+    }elseif($this->config['repository']['type'] == 'git'){
 
     }
     if(!is_dir($path)){
@@ -75,15 +78,15 @@ class ProjectController extends Controller{
     $path = realpath($path);
     // Change to project dir
     chdir($path);
-    if($this->config->phing->enabled){
-      $file = ($this->config->phing->file)?$this->config->phing->file:"build.xml";
+    if($this->config['phing']['enabled']){
+      $file = ($this->config['phing']['file'])?$this->config['phing']['file']:"build.xml";
       // Run phing build script
       if(!file_exists($file)){
         return $this->throwError("The requested phing build script {$file} does not exist.");
       }
       $file = escapeshellcmd($file);
-      if($this->config->phing->target){
-        $target = escapeshellcmd($this->config->phing->target);
+      if($this->config['phing']['target']){
+        $target = escapeshellcmd($this->config['phing']['target']);
       }else{
         $target = "";
       }

@@ -3,13 +3,18 @@ PHP Application Builder
 Requirements:
 -------------
 PHP 5.2+
-Zend Framework available from include path
 PEAR installation available from include path
+
+Required PEAR libraries:
+  Console_CommandLine
+  Console_Color
+  VersionControl_SVN [if project is in subversion]
+  VersionControl_Git [if project is in git]
 
 
 Installation:
 -------------
-Copy the sample.config.yml to config.yml
+Copy the sample.config.php to config.php
 Edit to point to repository of desired application.
 
 
