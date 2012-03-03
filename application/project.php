@@ -69,7 +69,22 @@ class ProjectController extends Controller{
         $this->throwError("Failed to export repository.");
       }
     }elseif($this->config['repository']['type'] == 'git'){
-
+      $command = escapeshellcmd($this->config['git']['git_path'] . " clone " . $this->config['repository']['url'] . " " . $path);
+      $this->showMessage($command);
+      $output = shell_exec($command);
+      $this->showmessage($output, true);
+      if(!is_dir($path)){
+        return $this->throwError("Project path does not exist. Repository checkout likely failed.");
+      }
+      if($this->config['repository']['params']['revision']){
+        // Now we can set the project path to absolute
+        $path = realpath($path);
+        // Change to project dir
+        chdir($path);
+        $command = escapeshellcmd($this->config['git']['git_path'] . " checkout " . $this->config['repository']['params']['revision']);
+        $this->showMessage($command);
+        $output = shell_exec($command);
+      }
     }
     if(!is_dir($path)){
       return $this->throwError("Project path does not exist. Repository checkout likely failed.");
@@ -91,7 +106,7 @@ class ProjectController extends Controller{
         $target = "";
       }
       $this->showMessage("Execute phing build script.");
-      $command = "phing -f {$file} -verbose {$target}";
+      $command = "phing -f ".$file." -verbose ".$target;
       $this->showMessage($command);
       $output = shell_exec($command);
       $this->showmessage($output, true);
