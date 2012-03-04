@@ -15,7 +15,7 @@ Required PEAR libraries:
 Installation:
 -------------
 
-Copy the sample.config.php to config.php
+Create a phab.yml in the config directory or in your user's home directory by copying default.yml.
 Edit to point to repository of desired application.
 
 
@@ -25,3 +25,6 @@ Usage:
 phab path
 Creates a new project in the given path.
 Path may be relative or absolute.
+
+You may pass a path to a config file to use instead of the default.
+phab --confif=path_to_config path

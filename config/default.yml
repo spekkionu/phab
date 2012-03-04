@@ -1,0 +1,40 @@
+
+# Set to true to show colors, may not work on windows
+show_colors:  true
+
+# Set Timezone in case not set in php.ini
+date_timezone: America/Los_Angeles
+
+# Does this project have a phing build script?
+phing:
+  enabled: true
+# What is the path to the build script relative to the project base dir
+# if blank use build.xml
+  file: build.xml
+# What build targets should be run
+# leave blank to run default
+# separate multiple targets with spaces
+  target: init
+
+# Project Repository
+# Can be svn, hg, or git
+repository:
+  type: git
+# the url of the repository
+  url:
+# credentials
+  params:
+    username:
+    password: 
+# you may request a specific revision, branch, or tag
+    revision: NULL
+
+# Path to subversion executable, must be absolute path if not on the system path
+subversion:
+  svn_path: svn
+# Path to git executable, must be absolute path if not on the system path
+git:
+  git_path: git
+# Path to mercurial executable, must be absolute path if not on the system path
+hg:
+  hg_path: hg

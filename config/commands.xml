@@ -8,6 +8,12 @@
     <description>hide displayed messages</description>
     <action>StoreTrue</action>
   </option>
+  <option name="config">
+    <short_name>-c</short_name>
+    <long_name>--config</long_name>
+    <description>path to config file</description>
+    <action>StoreString</action>
+  </option>
   <argument name="path">
     <description>the path to install the project to</description>
   </argument>

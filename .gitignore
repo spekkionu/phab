@@ -1,8 +1,6 @@
 # Cache and userfiles
-config/config.php
-# Do not include these until implemented
-library/PHamlP
-library/cssmin.php
+config/phab.yml
+
 
 
 # OS Files
