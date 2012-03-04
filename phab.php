@@ -1,14 +1,6 @@
 <?php
 define("SYSTEM", dirname(__FILE__));
 define("LIBRARY", SYSTEM.DIRECTORY_SEPARATOR.'library');
-define("APPLICATION", SYSTEM.DIRECTORY_SEPARATOR.'application');
-
-// Add library folder to thye include path
-// Make sure it includes Zend Framework and PEAR libraries
-set_include_path(
-  LIBRARY . PATH_SEPARATOR.
-  get_include_path()
-);
 
 // Load Config
 $config = require(SYSTEM.'/config/config.php');
@@ -31,25 +23,10 @@ try {
     $parser->displayError($e->getMessage());
     exit;
 }
-// Init MVC
-if($result->command_name){
-  $command = explode(':',$result->command_name, 2);
-  $command = array(
-    'controller' => $command[0],
-    'action' => $command[1]
-  );
-  // Init Controller
-  $controller = ucwords($command['controller']).'Controller';
-  $path = APPLICATION."/{$command['controller']}.php";
-  require_once(LIBRARY.'/Controller.php');
-  require($path);
-  $controller = new $controller($result, $config);
-  $controller->init();
-  // Execute Action
-  $action = $command['action'].'Action';
-  $controller->$action();
-}else{
-  echo "You must request a valid command.";
-}
+
+require_once(LIBRARY.'/ProjectCreator.php');
+$project = new ProjectCreator($result, $config);
+$project->createAction();
+
 // Complete appliction
 exit(PHP_EOL);

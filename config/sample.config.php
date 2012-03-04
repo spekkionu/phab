@@ -14,17 +14,17 @@ $config['phing']['file'] = NULL;
 // What build targets should be run
 // leave blank to run default
 // separate multiple targets with spaces
-$config['phing']['target'] = NULL; 
+$config['phing']['target'] = NULL;
 
 // Project Repository
 // Can be svn, hg, or git
 $config['repository']['type'] = "svn";
 // the url of the repository
-$config['repository']['url'] = ""; 
+$config['repository']['url'] = "";
 // credentials
-$config['repository']['params']['username'] = ""; 
-$config['repository']['params']['password'] = ""; 
-// you may request a specific revision
+$config['repository']['params']['username'] = "";
+$config['repository']['params']['password'] = "";
+// you may request a specific revision, branch, or tag
 $config['repository']['params']['revision'] = NULL;
 
 // Path to subversion executable, must be absolute path if not on the system path
@@ -33,6 +33,6 @@ $config['subversion']['svn_path'] = "svn";
 $config['git']['git_path'] = "git";
 // Path to mercurial executable, must be absolute path if not on the system path
 $config['hg']['hg_path'] = "hg";
-    
+
 // Return config variable
 return $config;

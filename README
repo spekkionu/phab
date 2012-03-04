@@ -2,6 +2,7 @@ PHP Application Builder
 
 Requirements:
 -------------
+
 PHP 5.2+
 PEAR installation available from include path
 
@@ -9,19 +10,18 @@ Required PEAR libraries:
   Console_CommandLine
   Console_Color
   VersionControl_SVN [if project is in subversion]
-  VersionControl_Git [if project is in git]
 
 
 Installation:
 -------------
+
 Copy the sample.config.php to config.php
 Edit to point to repository of desired application.
-
 
 
 Usage:
 ------
 
-phab project:create path
+phab path
 Creates a new project in the given path.
 Path may be relative or absolute.

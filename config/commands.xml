@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <command>
-  <description>A great program that can foo and bar !</description>
-  <version>1.0.0</version>
+  <description>Creates a new project</description>
+  <version>1.5.0</version>
   <option name="quiet">
     <short_name>-q</short_name>
     <long_name>--quiet</long_name>
     <description>hide displayed messages</description>
     <action>StoreTrue</action>
   </option>
-
-   <!-- Project creation commands -->
-  <command>
-    <name>project:create</name>
-    <description>Creates a new project</description>
-    <option name="force">
-      <short_name>-f</short_name>
-      <long_name>--force</long_name>
-      <description>delete existing files if directory is not empty</description>
-      <action>StoreTrue</action>
-    </option>
-    <argument name="path">
-      <description>the path to install the project to</description>
-    </argument>
-  </command>
-
-   <!-- CSS and JS commands -->
-  <command>
-    <name>css:combine</name>
-    <description>Combine css files</description>
-  </command>
-  <command>
-    <name>css:minify</name>
-    <description>Minify css files</description>
-  </command>
-  <command>
-    <name>js:combine</name>
-    <description>Combine javascript files</description>
-  </command>
-  <command>
-    <name>js:minify</name>
-    <description>Minify javascript files</description>
-  </command>
+  <argument name="path">
+    <description>the path to install the project to</description>
+  </argument>
 </command>
