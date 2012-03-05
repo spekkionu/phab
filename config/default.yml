@@ -1,13 +1,13 @@
 
 # Set to true to show colors, may not work on windows
-show_colors:  true
+show_colors:  false
 
 # Set Timezone in case not set in php.ini
 date_timezone: America/Los_Angeles
 
 # Does this project have a phing build script?
 phing:
-  enabled: true
+  enabled: false
 # What is the path to the build script relative to the project base dir
 # if blank use build.xml
   file: build.xml

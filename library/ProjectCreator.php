@@ -90,20 +90,22 @@ class ProjectCreator {
       }
     }elseif($this->config['repository']['type'] == 'git'){
       $command = escapeshellcmd($this->config['git']['git_path'] . " clone " . $this->config['repository']['url'] . " " . $path);
-      $output = shell_exec($command);
-      $this->showmessage($output, true);
+      passthru($command);
       if(!is_dir($path)){
         return $this->throwError("Project path does not exist. Repository checkout likely failed.");
       }
+			// Now we can set the project path to absolute
+			$path = realpath($path);
+			// Change to project dir
+			chdir($path);
       if($this->config['repository']['params']['revision']){
-        // Now we can set the project path to absolute
-        $path = realpath($path);
-        // Change to project dir
-        chdir($path);
         $command = escapeshellcmd($this->config['git']['git_path'] . " checkout " . $this->config['repository']['params']['revision']);
-        $output = shell_exec($command);
-        $this->showmessage($output, true);
+        passthru($command);
       }
+			$this->showMessage("Checkout submodules.");
+			// Now pull submodules
+			$command = escapeshellcmd($this->config['git']['git_path'] . " submodule update --init");
+			passthru($command);
 
     }elseif($this->config['repository']['type'] == 'hg'){
       return $this->throwError("Mercurial checkout not implemented.");
@@ -123,14 +125,13 @@ class ProjectCreator {
       }
       $file = escapeshellcmd($file);
       if($this->config['phing']['target']){
-        $target = escapeshellcmd($this->config['phing']['target']);
+        $target = $this->config['phing']['target'];
       }else{
         $target = "";
       }
       $this->showMessage("Execute phing build script.");
-      $command = "phing -f ".$file." -verbose ".$target;
-      $output = shell_exec($command);
-      $this->showmessage($output, true);
+      $command = escapeshellcmd("phing -f ".$file." -verbose ".$target);
+      passthru($command);
     }
     $this->showMessage("%2%kProject has been installed at {$path}%n", true);
   }
